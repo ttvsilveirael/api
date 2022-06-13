@@ -1,0 +1,24 @@
+{
+  "name": "apitest",
+  "version": "1.0.0",
+  "description": "apitest",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "notyet"
+  },
+  "keywords": [
+    "apitest"
+  ],
+  "author": "Eduardo Silveira",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mysql": "^2.18.1"
+  }
+}
