@@ -1,3 +1,5 @@
+const dbObject = require("../db");
+
 class Perfil {
     id;
     user;
@@ -15,6 +17,15 @@ class Perfil {
         this.nasc = nasc;
         this.email = email;
         this.image = image;
+    }
+
+    getDbObject() {
+        return [
+            new dbObject('ID', 'INT', true, true),
+            new dbObject('USER', 'VARCHAR(255)', false, false),
+            new dbObject('NOME', 'VARCHAR(255)', false, false),
+            new dbObject('SOBRENOME', 'BOOLEAN', false, false)
+        ];
     }
 }
 

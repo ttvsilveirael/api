@@ -1,3 +1,5 @@
+const dbObject = require("./dbObject");
+
 class User {
     id;
     username;
@@ -11,17 +13,14 @@ class User {
         this.ativo = ativo;
     }
 
-    pegarUsuario(){
-        return `O usuario eh ${this.username}`;
+    getDbObject() {
+        return [
+            new dbObject('ID', 'INT', true, true),
+            new dbObject('USERNAME', 'VARCHAR(255)', false, false),
+            new dbObject('PASSWORD', 'VARCHAR(255)', false, false),
+            new dbObject('ATIVO', 'BOOLEAN', false, false)
+        ];
     }
-
-    alterarUsername(novoUsername){
-        console.log(`O usuario atual eh ${this.username} e o novo sera ${novoUsername}`);
-        this.username = novoUsername;
-        
-        return(`Usuario alterado para ${this.username}`);
-    }
-
 }
 
 module.exports = User

@@ -7,3 +7,5 @@ class Modulo{
         this.nome = nome;
     }
 }
+
+module.exports = Modulo
