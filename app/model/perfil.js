@@ -1,4 +1,4 @@
-const dbObject = require("../db");
+const dbObject = require("../controllers/db");
 
 class Perfil {
     id;

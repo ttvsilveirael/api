@@ -23,4 +23,7 @@ class User {
     }
 }
 
+
+createTable(dbCon, 'user', new User().getDbObject());
+
 module.exports = User
