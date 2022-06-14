@@ -15,7 +15,7 @@ class Aula {
     created;
 
     constructor(id, nome, descricao, modulo, links,
-       nivel, requisito, twitch = null, youtube = null,
+        nivel, requisito, twitch = null, youtube = null,
         status = 'A') {
         this.id = id;
         this.nome = nome;
@@ -31,7 +31,7 @@ class Aula {
         this.created = Date.now();
     }
 
-    set nome(value){
+    set nome(value) {
         this.nome = value;
         this.lastChange = Date.now();
     }
