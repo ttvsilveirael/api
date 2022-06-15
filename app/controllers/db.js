@@ -5,7 +5,7 @@ var mysql = require('mysql');
 function createDatabase(nome) {
     var servCon = mysql.createConnection({
         host: "localhost",
-        user: "silveirael",
+        user: "jaaum",
         password: "Test@123",
     });
 
@@ -27,7 +27,7 @@ function createTable(nome, colunas) {
     //Cria conexão do banco de dados com db definido
     var dbCon = mysql.createConnection({
         host: "localhost",
-        user: "silveirael",
+        user: "jaaum",
         password: "Test@123",
         database: "slpDB"
     })
