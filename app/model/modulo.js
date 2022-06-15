@@ -1,3 +1,6 @@
+const createTable = require("../controllers/db");
+const dbObject = require("./dbObject");
+
 class Modulo {
     id;
     nome;
@@ -5,6 +8,20 @@ class Modulo {
     constructor(id, nome) {
         this.id = id;
         this.nome = nome;
+    }
+
+    /**
+    * Retorna as colunas do model user como dbObject
+   */
+    static getDbObject() {
+        return [
+            new dbObject('ID', 'INT', true, true),
+            new dbObject('NOME', 'VARCHAR(255)', false, false)
+        ];
+    }
+
+    static createModuloTable() {
+        createTable('modulo', Modulo.getDbObject())
     }
 }
 

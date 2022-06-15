@@ -1,10 +1,16 @@
 const cors = require('cors');
 const express = require('express');
+const Modulo = require('./app/model/modulo');
+const User = require('./app/model/user');
 
 const app = express()
 app.use(cors('*'))
 
-console.log('Test Test')
+User.createUserTable();
+Modulo.createModuloTable();
+
+// createDatabase();
+
 // app.get('/', (req, res) => {
 //     console.log(u);
 // })

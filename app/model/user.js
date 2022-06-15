@@ -1,3 +1,4 @@
+const createTable = require("../controllers/db");
 const dbObject = require("./dbObject");
 
 class User {
@@ -13,7 +14,10 @@ class User {
         this.ativo = ativo;
     }
 
-    getDbObject() {
+    /**
+     * Retorna as colunas do model user como dbObject
+    */
+    static getDbObject() {
         return [
             new dbObject('ID', 'INT', true, true),
             new dbObject('USERNAME', 'VARCHAR(255)', false, false),
@@ -21,9 +25,10 @@ class User {
             new dbObject('ATIVO', 'BOOLEAN', false, false)
         ];
     }
+    
+    static createUserTable() {
+        createTable('user', User.getDbObject())
+    }
 }
-
-
-createTable(dbCon, 'user', new User().getDbObject());
 
 module.exports = User
