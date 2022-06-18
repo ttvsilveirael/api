@@ -1,4 +1,5 @@
-const dbObject = require("../controllers/db");
+const database = require("../controllers/db");
+const dbObject = require("./dbObject");
 
 class Perfil {
     id;
@@ -19,13 +20,20 @@ class Perfil {
         this.image = image;
     }
 
-    getDbObject() {
+    static getDbObject() {
         return [
             new dbObject('ID', 'INT', true, true),
-            new dbObject('USER', 'VARCHAR(255)', false, false),
-            new dbObject('NOME', 'VARCHAR(255)', false, false),
-            new dbObject('SOBRENOME', 'BOOLEAN', false, false)
+            new dbObject('NOME', 'VARCHAR(100)', false, false),
+            new dbObject('SOBRENOME', 'VARCHAR(100)', false, false),
+            new dbObject('NASC', 'DATE', false, false),
+            new dbObject('EMAIL', 'VARCHAR(255)', false, false),
+            new dbObject('IMAGE', 'BLOB', false, false),
+            new dbObject('USERID', 'INT', false, false, 'ID', 'USER')
         ];
+    }
+
+    static createTable() {
+        database.createTable('perfil', Perfil.getDbObject());
     }
 }
 

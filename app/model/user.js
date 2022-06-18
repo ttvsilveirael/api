@@ -1,4 +1,4 @@
-const createTable = require("../controllers/db");
+const database = require("../controllers/db");
 const dbObject = require("./dbObject");
 
 class User {
@@ -25,9 +25,25 @@ class User {
             new dbObject('ATIVO', 'BOOLEAN', false, false)
         ];
     }
-    
-    static createUserTable() {
-        createTable('user', User.getDbObject())
+
+    static createTable() {
+        return database.createTable('user', User.getDbObject());
+    }
+
+    static adicionarUsuario(novoUsuario) {
+        database.insert('user', 'username, password, ativo', `'${novoUsuario.username}', '${novoUsuario.password}', ${novoUsuario.ativo}`);
+    }
+
+    static deleteUser(id) {
+        database.delete('user', id);
+    }
+
+    static updateUser(user) {
+        database.update('user', `username = '${user.username}', password = '${user.password}', ativo = ${user.ativo}`, `ID = ${user.id}`);
+    }
+
+    static getUser() {
+        database.get('user');
     }
 }
 

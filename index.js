@@ -2,33 +2,36 @@ const cors = require('cors');
 const express = require('express');
 const Modulo = require('./app/model/modulo');
 const User = require('./app/model/user');
+const Perfil = require('./app/model/perfil');
+var mysql = require('mysql');
+const database = require('./app/controllers/db');
 
 const app = express()
 app.use(cors('*'))
 
-User.createUserTable();
-Modulo.createModuloTable();
+async function createTables() {
 
-// createDatabase();
+    // await User.createTable();
+    // await Modulo.createTable();
+    // await Perfil.createTable();
+}
 
-// app.get('/', (req, res) => {
-//     console.log(u);
-// })
+function adicionarUsuario() {
+    novoUser = new User(null, 'eduardo', 'etst123', true);
+    User.adicionarUsuario(novoUser);
+}
 
-// app.listen(5000, () => console.log('Runing'))
+function deleteUser() {
+    User.deleteUser(2);
+}
 
-// user = new User();
+function updateUser() {
+    user = new User(3, 'Eduardo', 'SenhaDele', true);
+    User.updateUser(user);
+}
 
-// propriedades = user.getDbObject();
+function getUsers() {
+    User.getUser();
+}
 
-// propriedades.forEach(prop => {
-//     if (this.sqltext == '' || this.sqltext == undefined) this.sqltext = '(';
-//     else this.sqltext += ', ';
-//     this.sqltext += `${prop.key} ${prop.value} ${prop.autoIncrement ? ' AUTO_INCREMENT' : ''} ${prop.pk ? ' PRIMARY KEY' : ''}`;
-// });
-// this.sqltext += ')';
-
-// console.log(this.sqltext);
-
-// "(ID INT AUTO_INCREMENT PRIMARY KEY, USERNAME VARCHAR(255), PASSWORD VARCHAR(255), ATIVO BOOLEAN )"
-// "(ID INT AUTO_INCREMENT PRIMARY KEY, USERNAME VARCHAR(255), PASSWORD VARCHAR(255), ATIVO BOOLEAN )"
+getUsers();

@@ -1,4 +1,4 @@
-const createTable = require("../controllers/db");
+const database = require("../controllers/db");
 const dbObject = require("./dbObject");
 
 class Modulo {
@@ -20,8 +20,8 @@ class Modulo {
         ];
     }
 
-    static createModuloTable() {
-        createTable('modulo', Modulo.getDbObject())
+    static createTable() {
+        database.createTable('modulo', Modulo.getDbObject())
     }
 }
 
