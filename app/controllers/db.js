@@ -1,5 +1,7 @@
 const e = require('cors');
-var mysql = require('mysql');
+const bluebird = require('bluebird');
+const mysql = require('mysql2/promise');
+
 class database {
     //Cria conexão do banco de dados com db definido
     //Cria o banco de dados com a conexão padrão
@@ -67,36 +69,28 @@ class database {
         return this.sqltext;
     }
 
-    static insert(tabela, colunas, values) {
-        let dbCon = mysql.createConnection({
-            host: "localhost",
-            user: "silveirael",
+    static async insert(tabela, colunas, values) {
+        const connection = await mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
             password: "Test@123",
-            database: "slpDB"
+            database: "slpDB",
+            Promise: bluebird
         });
-        dbCon.query(`insert into ${tabela} (${colunas}) values (${values})`,
-            (err, resp) => {
-                if (err) throw err;
-                if (resp) console.log(resp);
-                console.log(`Valores inseridos na tabela ${tabela}`);
-            });
-
-
+        const [rows, fields] = await connection.query(`insert into ${tabela} (${colunas}) values (${values})`);
+        return "Usuario adicionado com sucesso"
     }
 
-    static delete(tabela, id) {
-        let dbCon = mysql.createConnection({
-            host: "localhost",
-            user: "silveirael",
+    static async delete(tabela, id) {
+        const connection = await mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
             password: "Test@123",
-            database: "slpDB"
+            database: "slpDB",
+            Promise: bluebird
         });
-        dbCon.query(`delete from ${tabela} where id = ${id}`,
-            (err, resp) => {
-                if (err) throw err;
-                if (resp) console.log(resp);
-                console.log(`Objeto removido na tabela ${tabela} com id ${id}`);
-            });
+        const [rows, fields] = await connection.execute(`delete from ${tabela} where id = ${id}`)
+        return `Usuario deletado com sucesso.`
     }
 
     /**
@@ -104,34 +98,28 @@ class database {
      *
      * @param valores Valores devem vir no formato 'key=value, key2=value2' 
     */
-    static update(tabela, valores, condicao) {
-        let dbCon = mysql.createConnection({
-            host: "localhost",
-            user: "silveirael",
+    static async update(tabela, valores, condicao) {
+        const connection = await mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
             password: "Test@123",
-            database: "slpDB"
+            database: "slpDB",
+            Promise: bluebird
         });
-        dbCon.query(`UPDATE ${tabela} SET ${valores} WHERE ${condicao};`,
-            (err, resp) => {
-                if (err) throw err;
-                if (resp) console.log(resp);
-                console.log(`Objeto atualizado na tabela ${tabela}`);
-            });
+        const [rows, fields] = await connection.execute(`UPDATE ${tabela} SET ${valores} WHERE ${condicao};`);
+        return `Usuario atualizado com sucesso`;
     }
 
-    static get(tabela) {
-        let dbCon = mysql.createConnection({
-            host: "localhost",
-            user: "silveirael",
+    static async get(tabela, id) {
+        const connection = await mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
             password: "Test@123",
-            database: "slpDB"
+            database: "slpDB",
+            Promise: bluebird
         });
-        dbCon.query(`SELECT * FROM ${tabela}`,
-            (err, resp) => {
-                if (err) throw err;
-                if (resp) { console.log(resp); console.table(resp) }
-                console.log(`Objetos listados da tabela ${tabela}`);
-            });
+        const [rows, fields] = await connection.execute(`SELECT * FROM ${tabela} ${id != null ? 'WHERE ID = ' + id : ''}`);
+        return rows;
     }
 }
 

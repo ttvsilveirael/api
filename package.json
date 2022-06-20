@@ -17,9 +17,12 @@
   "author": "Eduardo Silveira",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "mysql": "^2.18.1"
+    "fastify": "^4.0.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"

@@ -30,20 +30,20 @@ class User {
         return database.createTable('user', User.getDbObject());
     }
 
-    static adicionarUsuario(novoUsuario) {
-        database.insert('user', 'username, password, ativo', `'${novoUsuario.username}', '${novoUsuario.password}', ${novoUsuario.ativo}`);
+    static insertUser(novoUsuario) {
+        return database.insert('user', 'username, password, ativo', `'${novoUsuario.username}', '${novoUsuario.password}', ${novoUsuario.ativo}`);
     }
 
     static deleteUser(id) {
-        database.delete('user', id);
+        return database.delete('user', id);
     }
 
     static updateUser(user) {
-        database.update('user', `username = '${user.username}', password = '${user.password}', ativo = ${user.ativo}`, `ID = ${user.id}`);
+        return database.update('user', `username = '${user.username}', password = '${user.password}', ativo = ${user.ativo}`, `ID = ${user.id}`);
     }
 
-    static getUser() {
-        database.get('user');
+    static getUser(id) {
+        return database.get('user', id);
     }
 }
 
